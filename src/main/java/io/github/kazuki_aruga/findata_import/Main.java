@@ -30,7 +30,7 @@ public class Main {
 		try (Connection conn = DriverManager.getConnection(
 				"jdbc:mysql://localhost:3306/text-analyzer?autoReconnect=true&useSSL=false", "text-analyzer",
 				"text-analyzer");
-				Workbook book = WorkbookFactory.create(ClassLoader.getSystemResourceAsStream("findata.xlsx"))) {
+				Workbook book = WorkbookFactory.create(ClassLoader.getSystemResourceAsStream("findata_add.xlsx"))) {
 
 			final Sheet finSheet = book.getSheet("財務諸表");
 			for (int i = finSheet.getFirstRowNum() + 1, last = finSheet.getLastRowNum() + 1; i < last; i++) {
@@ -60,8 +60,8 @@ public class Main {
 				final RdData rd = new RdData();
 				rd.setCompCode(Integer.toString(getIntValue(row.getCell(0))));
 				rd.setYear(getYear(row.getCell(2)));
-				rd.setRd(getIntValue(row.getCell(3)));
-				rd.setNi(getIntValue(row.getCell(4)));
+				rd.setRd(getIntValue(row.getCell(4)));
+				rd.setNi(getIntValue(row.getCell(5)));
 
 				if (!updateReportRd(conn, rd)) {
 
